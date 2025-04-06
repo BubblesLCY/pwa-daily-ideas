@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>每日灵感</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4CAF50">
+  <link rel="icon" href="icon-192.png">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f6f6f6;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #4CAF50;
+    }
+    .idea {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📅 今日灵感点子</h1>
+    <p class="idea" id="idea">加载中...</p>
+  </div>
+
+  <script>
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    function seededRandom(seed) {
+      let x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    const categories = {
+      "科技": [
+        "开发一个可以语音操作的日程管理App",
+        "设计一个追踪碳足迹的智能手环",
+        "创建一个AI帮你写PPT的网站"
+      ],
+      "生活": [
+        "推出一个一人食食谱订阅服务",
+        "设计一个自动检测室内空气质量并联动空气净化器的小工具",
+        "做一个帮助人们整理衣柜和搭配穿搭的App"
+      ],
+      "艺术": [
+        "画一组‘城市寂静’主题插画",
+        "写一本融合童话与心理学的绘本",
+        "制作一个讲述梦境的动画短片"
+      ],
+      "商业": [
+        "做一个帮助小商家生成产品描述的AI工具",
+        "开发一个二手物品交换平台",
+        "做一个在线服务型创业模拟器帮助新人练习经营思维"
+      ]
+    };
+
+    const keys = Object.keys(categories);
+    const catIndex = Math.floor(seededRandom(seed) * keys.length);
+    const ideaList = categories[keys[catIndex]];
+    const ideaIndex = Math.floor(seededRandom(seed + 1) * ideaList.length);
+    const idea = ideaList[ideaIndex];
+
+    document.getElementById("idea").textContent = "来自『" + keys[catIndex] + "』领域：💡 " + idea;
+  </script>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('✅ Service Worker 注册成功', reg))
+        .catch(err => console.error('❌ 注册失败', err));
+    }
+  </script>
+</body>
+</html>
