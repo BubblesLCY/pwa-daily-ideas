@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>每日点子 · 启动中</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      color: white;
+      overflow: hidden;
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      background-image: url('icon-192.png'); /* 你自己的 logo 图片 */
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0;
+      transform: scale(0.6);
+      animation: fadeInScale 1.5s ease-out forwards;
+    }
+
+    @keyframes fadeInScale {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .text {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      animation: fadeText 2s ease-out;
+    }
+
+    @keyframes fadeText {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo"></div>
+  <div class="text">加载每日灵感中…</div>
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000); // 3 秒后跳转主页
+  </script>
+</body>
+</html>
